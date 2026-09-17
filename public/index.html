@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>星空粒子 · 2026</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 加载页 -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-title">STARRY · 2026</div>
+    <div class="loader-bar"><div id="loaderProgress"></div></div>
+    <div id="loaderPercent">0%</div>
+    <div class="loader-tip">正在汇聚星光…</div>
+  </div>
+</div>
+
+<!-- 3D 场景 -->
+<div id="scene"></div>
+
+<!-- 标题 -->
+<div id="titleWrap">
+  <h1 id="title">2026</h1>
+  <p id="subtitle">愿星光与你同在</p>
+</div>
+
+<!-- 手势提示 -->
+<div id="gestureHint">
+  <span>✋ 张手 · 星雨漫天</span>
+  <span>🤏 捏合 · 翻阅照片</span>
+  <span>✊ 握拳 · 聚合成心</span>
+</div>
+
+<!-- BGM 控制 -->
+<button id="bgmBtn" title="播放/暂停音乐">♪</button>
+<audio id="bgm" loop preload="auto"></audio>
+
+<!-- 摄像头预览 -->
+<div id="camPreview" class="hidden">
+  <video id="camVideo" autoplay muted playsinline></video>
+  <div id="camStatus">手势识别已启用</div>
+</div>
+
+<!-- 右上角按钮组 -->
+<div id="topBtns">
+  <button id="gestureBtn" title="启用手势控制">🖐</button>
+  <button id="drawerBtn" title="打开配置面板">⚙</button>
+</div>
+
+<!-- 右侧配置抽屉 -->
+<aside id="drawer">
+  <div class="drawer-head">
+    <h2>配置面板</h2>
+    <button id="drawerClose">×</button>
+  </div>
+  <div class="drawer-body">
+    <section>
+      <h3>文本</h3>
+      <label>主标题 <input id="cfgTitle" type="text" maxlength="20"></label>
+      <label>副标题 <input id="cfgSubtitle" type="text" maxlength="40"></label>
+    </section>
+    <section>
+      <h3>视觉</h3>
+      <label>粒子类型
+        <select id="cfgParticleType">
+          <option value="glow">光球</option>
+          <option value="snow">雪花</option>
+          <option value="star">星星</option>
+        </select>
+      </label>
+      <label>主色 <input id="cfgColor" type="color"></label>
+      <label>点缀色 <input id="cfgAccent" type="color"></label>
+      <label>文字形状 <input id="cfgText" type="text" maxlength="10" placeholder="如 2026"></label>
+      <button id="applyText" class="btn">粒子重组为该文字</button>
+      <div class="shape-btns">
+        <button class="btn ghost" data-shape="heart">❤ 心形</button>
+        <button class="btn ghost" data-shape="text">🔤 文字</button>
+        <button class="btn ghost" data-shape="burst">✨ 满天星</button>
+      </div>
+    </section>
+    <section>
+      <h3>媒体</h3>
+      <label>上传照片 <input id="cfgPhotoUpload" type="file" accept="image/*" multiple></label>
+      <label>照片 URL <input id="cfgPhotoUrl" type="url" placeholder="https://…"><button id="addPhotoUrl" class="btn mini">添加</button></label>
+      <div id="photoList"></div>
+      <label>背景音乐 URL <input id="cfgBgmUrl" type="url" placeholder="https://…/bgm.mp3"></label>
+      <label>或上传音乐 <input id="cfgBgmFile" type="file" accept="audio/*,.flac,.mp3,.wav,.ogg,.m4a,audio/flac,audio/x-flac"></label>
+      <button id="applyBgm" class="btn">更换背景音乐</button>
+    </section>
+    <section>
+      <h3>分享</h3>
+      <button id="openShare" class="btn primary">生成专属链接 / 兑换码</button>
+    </section>
+  </div>
+</aside>
+
+<!-- 分享弹窗 -->
+<div id="shareModal" class="hidden">
+  <div class="share-card">
+    <button id="shareClose" class="share-close">×</button>
+    <h2>分享你的星空</h2>
+    <label>自定义 URL 后缀（如 2026-01-01-go）<input id="shareSlug" type="text" maxlength="40" placeholder="2026-01-01-go"></label>
+    <label>兑换码（留空自动生成）<input id="shareCode" type="text" maxlength="40" placeholder="LOVE-2026"></label>
+    <button id="genShare" class="btn primary">生成分享链接</button>
+    <div id="shareResult" class="hidden">
+      <div id="shareLink"></div>
+      <button id="copyLink" class="btn mini">复制链接</button>
+      <div id="qrcode"></div>
+    </div>
+    <div id="shareMsg"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/gestures.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
